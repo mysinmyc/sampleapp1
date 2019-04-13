@@ -90,7 +90,7 @@ public class Search extends Div {
 			remove(gridResults);
 		}
 
-		gridResults = new Grid<>(currentClass.getJavaClass(),false);
+		gridResults = new Grid<>(currentClass.getJavaClass());
 		Column<?> buttonColumn = gridResults.addComponentColumn( i->  {
 			HorizontalLayout divButtons = new HorizontalLayout();
 			divButtons.setPadding(true);
