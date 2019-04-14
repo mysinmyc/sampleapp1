@@ -16,4 +16,6 @@ COPY --from=buildStage /sampleapp1/frontend/target/frontend*.jar /
 
 ADD entrypoint.sh /
 
+ENV APPUSERS_PASSWORD t0polino
+
 CMD ["sh", "/entrypoint.sh"]

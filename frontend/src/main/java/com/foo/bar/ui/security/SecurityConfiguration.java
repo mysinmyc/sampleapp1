@@ -1,23 +1,30 @@
 package com.foo.bar.ui.security;
 
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;import org.springframework.web.server.WebFilterChain;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	/*
-
-				.loginPage("/login.html").loginProcessingUrl("/login.do").defaultSuccessUrl("/ciao",true)
-				.failureUrl("/login.html?status=failed") */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
@@ -32,17 +39,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.logoutUrl("/logout")
 		.permitAll();
 	}
-
+	
+	@Autowired
+	@Value("${APPUSERS_PASSWORD:passw0rd}")
+	String appUsersPassword;
+	
 	@Bean
 	@Override
 	public UserDetailsService userDetailsService() {
-		UserDetails admin = User.withDefaultPasswordEncoder().username("admin").password("password").roles("ADMIN")
+		
+		System.out.println("Password is "+appUsersPassword);
+
+		UserDetails admin = User.withDefaultPasswordEncoder().username("admin").password(appUsersPassword).roles("ADMIN")
 				.build();
 
-		UserDetails user1 = User.withDefaultPasswordEncoder().username("user1").password("password").roles("USER")
+		UserDetails user1 = User.withDefaultPasswordEncoder().username("user1").password(appUsersPassword).roles("USER")
 				.build();
 
-		UserDetails user2 = User.withDefaultPasswordEncoder().username("user2").password("password").roles("USER")
+		UserDetails user2 = User.withDefaultPasswordEncoder().username("user2").password(appUsersPassword).roles("USER")
 				.build();
 
 		return new InMemoryUserDetailsManager(admin, user1,user2);
