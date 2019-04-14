@@ -6,11 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScans;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import com.foo.bar.EnableFoorBarBackend;
 import com.foo.bar.ui.data.TestDataPopulator;
@@ -24,6 +21,7 @@ import com.vaadin.flow.spring.annotation.EnableVaadin;
 @EnableVaadin
 @EnableFoorBarBackend
 @EnableTransactionManagement
+@PropertySource("classpath:static/version.properties")
 public class App extends SpringBootServletInitializer implements ApplicationListener<ApplicationReadyEvent>{
 	
 	@Autowired

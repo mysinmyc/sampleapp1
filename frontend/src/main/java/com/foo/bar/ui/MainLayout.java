@@ -4,6 +4,7 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcon;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 
 import com.vaadin.flow.component.Component;
@@ -17,10 +18,13 @@ import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
-@Route("")
 @Theme(value = Lumo.class, variant = Lumo.DARK)
 public class MainLayout extends AppLayout implements RouterLayout {
 
+	@Autowired
+	@Value("${git.version}")
+	String version;
+	
 	@Autowired
 	@Lazy
 	Search searchComponent;
@@ -31,12 +35,12 @@ public class MainLayout extends AppLayout implements RouterLayout {
 
 	public MainLayout() {
 
-		buildContent();
+		addAttachListener( e->buildContent());
 	}
 
 	protected void buildContent() {
-		setBranding(new Label("Sample application"));
-		buildMenu();
+			setBranding(new Label("Sample application ("+version+")"));
+			buildMenu();
 	}
 
 	protected void buildMenu() {

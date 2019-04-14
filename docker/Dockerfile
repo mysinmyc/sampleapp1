@@ -2,7 +2,8 @@ FROM maven as buildStage
 
 RUN git clone https://github.com/mysinmyc/sampleapp1.git
 
-RUN cd sampleapp1 &&  mvn -Dmaven.test.skip=true package
+RUN echo "git.version=$(git describe --tags)"  > sampleapp1/frontend/src/main/resources/static/version.properties
+RUN cd sampleapp1 && mvn versions:set -DnewVersion=$(git describe --tags) && mvn -Dmaven.test.skip=true package
 
 
 FROM openjdk:8
