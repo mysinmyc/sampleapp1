@@ -15,6 +15,7 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.Grid.Column;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -41,6 +42,8 @@ public class Search extends Div {
 
 	Grid<?> gridResults;
 
+	Label lblMessage;
+	
 	public Search() {
 		addAttachListener(e -> buildContent());
 	}
@@ -70,6 +73,9 @@ public class Search extends Div {
 		barLayout.add(comboConfigurationItem, txtSearch, btnSearch, btnNew);
 		add(barLayout);
 		setFieldsVisibile(false);
+		
+		lblMessage = new Label();
+		add(lblMessage);
 	}
 
 	ConfigurationItemClass currentClass;
@@ -92,9 +98,9 @@ public class Search extends Div {
 
 		gridResults = new Grid<>(currentClass.getJavaClass());
 		Column<?> buttonColumn = gridResults.addComponentColumn( i->  {
-			HorizontalLayout divButtons = new HorizontalLayout();
-			divButtons.setPadding(true);
+			Div divButtons = new Div();
 			divButtons.add(new Button(VaadinIcon.EDIT.create()));
+			divButtons.add(" ");
 			divButtons.add(new Button(VaadinIcon.COG.create()));
 			return divButtons;
 		}).setHeader("Actions");
@@ -104,8 +110,16 @@ public class Search extends Div {
 		add(gridResults);
 
 		try {
-			gridResults.setItems(
-					configurationItemDao.executeSearch(new ConfigurationItemQuery(currentClass, txtSearch.getValue())));
+			List<?> found= configurationItemDao.executeSearch(new ConfigurationItemQuery(currentClass, txtSearch.getValue()));
+			
+			String message = "Found "+found.size()+" cis of type "+currentClass.getName()+" that matches query '"+txtSearch.getValue()+"'";
+			
+			if (found.size()>50) {
+				message+=", first 50  displayed";
+			}
+			lblMessage.setText(message);
+			gridResults.setItems((Stream)found.stream().limit(50));
+					;
 		} catch (Exception e) {
 			e.printStackTrace();
 			Notification.show("ERROR:"+e.getMessage());
