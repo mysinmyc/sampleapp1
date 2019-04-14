@@ -74,7 +74,7 @@ public class TestDataPopulator{
 			currentActivity.setName("Generic activity "+vCnt);
 			currentActivity.setStatus( vCnt%7 ==0 ? ActivityStatus.FAILED:ActivityStatus.SUCCEDED);
 			currentActivity.setStartTime(LocalDateTime.now().minus(Duration.ofHours(vCnt)));
-			currentActivity.setStartTime(LocalDateTime.now().minus(Duration.ofHours(vCnt).plus(Duration.ofMinutes(vCnt))));
+			currentActivity.setEndTime(LocalDateTime.now().minus(Duration.ofHours(vCnt).plus(Duration.ofMinutes(vCnt))));
 			activitiesRepository.save(currentActivity);
 		}
 	}
