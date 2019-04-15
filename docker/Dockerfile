@@ -5,7 +5,7 @@ RUN git clone https://github.com/mysinmyc/sampleapp1.git
 RUN cd sampleapp1 \
 	&& echo "git.version=$(git describe --tags)"  > frontend/src/main/resources/static/version.properties \
 	&& mvn versions:set -DnewVersion=$(git describe --tags) \
-	&& mvn -Dmaven.test.skip=true package 
+	&& mvn -Pproduction-mode -Dmaven.test.skip=true package 
 
 
 FROM openjdk:8
