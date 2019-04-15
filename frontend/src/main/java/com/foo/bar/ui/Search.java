@@ -64,6 +64,7 @@ public class Search extends Div {
 		btnSearch = new Button(VaadinIcon.SEARCH.create());
 		btnSearch.addClickListener(e -> startSearch());
 		btnSearch.addClickShortcut(Key.ENTER);
+		btnSearch.setDisableOnClick(true);
 		btnNew = new Button(VaadinIcon.FILE_ADD.create());
 
 		HorizontalLayout barLayout = new HorizontalLayout();
@@ -92,6 +93,7 @@ public class Search extends Div {
 
 	public void startSearch() {
 
+		btnSearch.setEnabled(true);
 		if (gridResults != null) {
 			remove(gridResults);
 		}
