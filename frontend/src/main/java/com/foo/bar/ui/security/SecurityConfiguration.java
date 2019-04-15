@@ -28,12 +28,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
-	    .antMatchers("/h2-console/**").permitAll()
 	    .antMatchers("/frontend/**").permitAll()
+	    .antMatchers("/VAADIN/**").permitAll()
+	   	.regexMatchers("\\/[^\\/]*uidl.*").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()
-		.loginPage("/loginPage.html")
+		//.loginPage("/loginPage.html")
+		.loginPage("/loginPage")
 		.loginProcessingUrl("/login")
 		.permitAll().and().logout()
 		.logoutUrl("/logout")
