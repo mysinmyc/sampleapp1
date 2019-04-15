@@ -18,4 +18,6 @@ ADD entrypoint.sh /
 
 ENV APPUSERS_PASSWORD t0polino
 
+ENV JAVA_ADDITIONALARGS "-Dvaadin.productionMode=true"
+
 CMD ["sh", "/entrypoint.sh"]

@@ -1,2 +1,2 @@
 
-java -jar /frontend*jar
+java ${JAVA_ADDITIONALARGS:-} -jar /frontend*jar
