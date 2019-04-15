@@ -28,7 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
-	    .antMatchers("/frontend/**").permitAll()
+		.regexMatchers("\\/frontend.*").permitAll()
 	    .antMatchers("/VAADIN/**").permitAll()
 	   	.regexMatchers("\\/[^\\/]*uidl.*").permitAll()
 		.anyRequest().authenticated()
