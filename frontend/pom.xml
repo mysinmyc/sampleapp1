@@ -93,4 +93,48 @@
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<!-- Production mode can be activated with either property or profile -->
+			<id>production-mode</id>
+			<activation>
+				<property>
+					<name>vaadin.productionMode</name>
+				</property>
+			</activation>
+			<properties>
+				<vaadin.productionMode>true</vaadin.productionMode>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>com.vaadin</groupId>
+					<artifactId>flow-server-production-mode</artifactId>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.vaadin</groupId>
+						<artifactId>vaadin-maven-plugin</artifactId>
+						<version>${vaadin.version}</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>copy-production-files</goal>
+									<goal>package-for-production</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+						<configuration>
+							<jvmArguments>-Dvaadin.productionMode</jvmArguments>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
