@@ -38,6 +38,10 @@ public class TestDataPopulator{
 
 	@Transactional
 	public void populateStages() {
+		
+		if (entityManager.createQuery("select count(x) from ProductiveStage x",Long.class).getSingleResult() >0) {
+			return;
+		}
 
 		for (String currentStageName : new String[] {"test", "uat","production"}) {
 			ProductiveStage currentStage  = new ProductiveStage();
@@ -49,6 +53,12 @@ public class TestDataPopulator{
 	@Transactional
 	public void populateInfrastructure() {
 
+		
+		if (entityManager.createQuery("select count(x) from Host x",Long.class).getSingleResult() >0) {
+			return;
+		}
+
+		
 		int vNet=10;
 		for ( ProductiveStage currentStage : entityManager.createQuery("from ProductiveStage",ProductiveStage.class).getResultList()) {
 			vNet++;
@@ -65,6 +75,12 @@ public class TestDataPopulator{
 
 	@Transactional
 	public void populateActivites() {
+		
+		
+		if (entityManager.createQuery("select count(x) from Activity x",Long.class).getSingleResult() >0) {
+			return;
+		}
+
 		
 		for ( int vCnt = 0; vCnt<1000;vCnt++) {
 			
