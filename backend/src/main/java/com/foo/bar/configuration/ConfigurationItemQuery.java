@@ -3,19 +3,19 @@ package com.foo.bar.configuration;
 public class ConfigurationItemQuery {
 
 	
-	ConfigurationItemClass configurationItemClass;
+	ConfigurationItemClassDescriptor configurationItemClass;
 	
 	
 	String criteria;
 
 
 
-	public ConfigurationItemQuery(ConfigurationItemClass configurationItemClass, String criteria) {
+	public ConfigurationItemQuery(ConfigurationItemClassDescriptor configurationItemClass, String criteria) {
 		this.configurationItemClass = configurationItemClass;
 		this.criteria = criteria;
 	}
 	
-	public ConfigurationItemClass getConfigurationItemClass() {
+	public ConfigurationItemClassDescriptor getConfigurationItemClass() {
 		return configurationItemClass;
 	}
 

@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import com.foo.bar.configuration.api.ConfigurationItem;
+import com.foo.bar.configuration.api.ConfigurationItemField;
 import com.foo.bar.configuration.api.Searchable;
 
 @ConfigurationItem(name="Productive stage")
@@ -32,7 +33,7 @@ public class ProductiveStage {
 		this.id = id;
 	}
 
-
+	@ConfigurationItemField
 	public String getName() {
 		return name;
 	}

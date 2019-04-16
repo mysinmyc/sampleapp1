@@ -6,6 +6,7 @@ import javax.persistence.Id;
 
 import com.foo.bar.configuration.ConfigurationItemCategory;
 import com.foo.bar.configuration.api.ConfigurationItem;
+import com.foo.bar.configuration.api.ConfigurationItemField;
 import com.foo.bar.configuration.api.Searchable;
 
 @ConfigurationItem(category=ConfigurationItemCategory.Business,name="Area")
@@ -34,11 +35,12 @@ public class BusinessArea {
 	}
 
 
+	@ConfigurationItemField
 	public String getName() {
 		return name;
 	}
 
-
+	
 	public void setName(String name) {
 		this.name = name;
 	}

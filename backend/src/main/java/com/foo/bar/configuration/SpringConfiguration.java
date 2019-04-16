@@ -15,19 +15,19 @@ import com.foo.bar.configuration.api.ConfigurationItem;
 public class SpringConfiguration {
 
 	@Bean
-	public List<ConfigurationItemClass> configurationItemClasses(EntityManager entityManager) {
+	public List<ConfigurationItemClassDescriptor> configurationItemClasses(EntityManager entityManager) {
 		return entityManager.getMetamodel().getEntities().stream().map(this::buildFromEntityType).filter(c -> c != null)
 				.collect(Collectors.toList());
 
 	}
 
-	protected ConfigurationItemClass buildFromEntityType(EntityType<?> entityType) {
+	protected ConfigurationItemClassDescriptor buildFromEntityType(EntityType<?> entityType) {
 
 		ConfigurationItem annotation = entityType.getJavaType().getAnnotation(ConfigurationItem.class);
 		if (annotation == null) {
 			return null;
 		}
-		ConfigurationItemClass configurationItemClass = new ConfigurationItemClass();
+		ConfigurationItemClassDescriptor configurationItemClass = new ConfigurationItemClassDescriptor();
 		configurationItemClass.setJavaClass(entityType.getJavaType());
 		configurationItemClass.setCategory(annotation.category());
 		configurationItemClass

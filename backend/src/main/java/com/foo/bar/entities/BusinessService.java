@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 
 import com.foo.bar.configuration.ConfigurationItemCategory;
 import com.foo.bar.configuration.api.ConfigurationItem;
+import com.foo.bar.configuration.api.ConfigurationItemField;
 import com.foo.bar.configuration.api.Searchable;
 
 @ConfigurationItem(category=ConfigurationItemCategory.Business,name="Service")
@@ -35,7 +36,7 @@ public class BusinessService {
 		this.id = id;
 	}
 
-
+	@ConfigurationItemField
 	public String getName() {
 		return name;
 	}
@@ -54,7 +55,7 @@ public class BusinessService {
 	@ManyToOne(fetch=FetchType.LAZY)
 	BusinessArea businessArea;
 
-
+	@ConfigurationItemField
 	public BusinessArea getBusinessArea() {
 		return businessArea;
 	}
