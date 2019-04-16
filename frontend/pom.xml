@@ -114,7 +114,8 @@
 						<executions>
 							<execution>
 								<goals>
-									<goal>package-for-production</goal>
+									<goal>update-theme</goal>
+									<goal>update-widgetset</goal>
 								</goals>
 							</execution>
 						</executions>
