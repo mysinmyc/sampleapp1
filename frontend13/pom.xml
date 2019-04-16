@@ -10,7 +10,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<packaging>jar</packaging>
-	<artifactId>frontend</artifactId>
+	<artifactId>frontend13</artifactId>
 	<properties>
 		<vaadin.version>13.0.3</vaadin.version>
 	</properties>
