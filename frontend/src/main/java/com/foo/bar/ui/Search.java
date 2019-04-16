@@ -55,7 +55,7 @@ public class Search extends Div {
 		comboConfigurationItem = new ComboBox<ConfigurationItemClass>();
 		comboConfigurationItem.setItems(configurationItemClasses);
 		comboConfigurationItem.setPlaceholder("Configuration item class");
-		comboConfigurationItem.setItemLabelGenerator(ConfigurationItemClass::getName);
+		comboConfigurationItem.setItemLabelGenerator( ConfigurationItemClass::getName);
 		comboConfigurationItem.addValueChangeListener(e -> setCurrentClass(e.getValue()));
 		comboConfigurationItem.setWidth("300px");
 		txtSearch = new TextField();

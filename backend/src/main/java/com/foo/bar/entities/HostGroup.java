@@ -1,17 +1,20 @@
 package com.foo.bar.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import com.foo.bar.configuration.ConfigurationItemCategory;
 import com.foo.bar.configuration.api.ConfigurationItem;
 
-@ConfigurationItem(category=ConfigurationItemCategory.Infrastructure,name="Host")
+@ConfigurationItem(category=ConfigurationItemCategory.Infrastructure,name="Host group")
 @Entity
-public class Host {
+public class HostGroup {
 
 	
 	
@@ -71,5 +74,14 @@ public class Host {
 		this.productiveStage = productiveStage;
 	}
 	
-	
+	@ManyToMany
+	List<BusinessService> services;
+
+	public List<BusinessService> getServices() {
+		return services;
+	}
+
+	public void setServices(List<BusinessService> services) {
+		this.services = services;
+	} 
 }

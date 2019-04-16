@@ -1,15 +1,18 @@
 package com.foo.bar.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+import com.foo.bar.configuration.ConfigurationItemCategory;
 import com.foo.bar.configuration.api.ConfigurationItem;
 import com.foo.bar.configuration.api.Searchable;
 
-@ConfigurationItem(name="Productive stage")
+@ConfigurationItem(category=ConfigurationItemCategory.Business,name="Service")
 @Entity
-public class ProductiveStage {
+public class BusinessService {
 
 	
 
@@ -46,5 +49,18 @@ public class ProductiveStage {
 	public String toString() {
 	
 		return name;
+	}
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	BusinessArea businessArea;
+
+
+	public BusinessArea getBusinessArea() {
+		return businessArea;
+	}
+
+
+	public void setBusinessArea(BusinessArea businessArea) {
+		this.businessArea = businessArea;
 	}
 }

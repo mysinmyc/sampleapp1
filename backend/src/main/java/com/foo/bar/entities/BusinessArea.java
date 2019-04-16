@@ -4,12 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import com.foo.bar.configuration.ConfigurationItemCategory;
 import com.foo.bar.configuration.api.ConfigurationItem;
 import com.foo.bar.configuration.api.Searchable;
 
-@ConfigurationItem(name="Productive stage")
+@ConfigurationItem(category=ConfigurationItemCategory.Business,name="Area")
 @Entity
-public class ProductiveStage {
+public class BusinessArea {
 
 	
 

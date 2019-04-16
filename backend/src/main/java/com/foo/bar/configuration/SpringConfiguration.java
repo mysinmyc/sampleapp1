@@ -29,6 +29,7 @@ public class SpringConfiguration {
 		}
 		ConfigurationItemClass configurationItemClass = new ConfigurationItemClass();
 		configurationItemClass.setJavaClass(entityType.getJavaType());
+		configurationItemClass.setCategory(annotation.category());
 		configurationItemClass
 				.setName("".equals(annotation.name()) ? entityType.getJavaType().getSimpleName() : annotation.name());
 		return configurationItemClass;

@@ -7,11 +7,12 @@ public class ConfigurationItemClass{
 		
 	}
 	
-	public ConfigurationItemClass(Class javaClass, String name) {
+	public ConfigurationItemClass(Class javaClass, ConfigurationItemCategory category, String name) {
 		this.javaClass = javaClass;
 		this.name=name;
 	}
 	
+
 	public void setJavaClass(Class javaClass) {
 		this.javaClass = javaClass;
 	}
@@ -19,6 +20,11 @@ public class ConfigurationItemClass{
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public void setCategory(ConfigurationItemCategory category) {
+		this.category = category;
+	}
+
 
 	Class javaClass;
 	
@@ -33,4 +39,13 @@ public class ConfigurationItemClass{
 	}
 
 	
+	ConfigurationItemCategory category;
+
+	public ConfigurationItemCategory getCategory() {
+		return category;
+	}
+	
+	public String getLabel() {
+		return category.name() + " - " + name;
+	}
 }

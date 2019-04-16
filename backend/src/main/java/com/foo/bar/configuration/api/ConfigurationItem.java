@@ -7,10 +7,14 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import com.foo.bar.configuration.ConfigurationItemCategory;
+
 @Target(TYPE)
 @Retention(RUNTIME)
 @Inherited
 public @interface ConfigurationItem {
 
+	ConfigurationItemCategory category() default ConfigurationItemCategory.Generic;
+	
 	String name() default "";
 }
